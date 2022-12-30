@@ -29,30 +29,35 @@ router.get('/json', (req, res) => {
 
 router.get('/puppeteer', (req, res) => {
     
-    (async() =>{
-        const browser = await puppeteer.launch({
-            args: chromium.args,
-            executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
-            headless: false,
-        });
-        
-        const page = await browser.newPage();
-        
-        await page.goto('https://zillow.com/');
-        
-        const title = await page.title();
-        const description = await page.$eval('meta[name="description"]', element => element.content);
-        
-        await browser.close();
+    try {
+        (async() =>{
+            const browser = await puppeteer.launch({
+                args: chromium.args,
+                executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
+                headless: false,
+            });
+            
+            const page = await browser.newPage();
+            
+            await page.goto('https://zillow.com/');
+            
+            const title = await page.title();
+            const description = await page.$eval('meta[name="description"]', element => element.content);
+            
+            await browser.close();
 
-        console.log(`Done`);
+            console.log(`Done`);
 
-        res.json({
-            'path':'puppeteer',
-            'Message': "Done"
-        });
+            res.json({
+                'path':'puppeteer',
+                'Message': "Done"
+            });
 
-    })();
+        })();
+    } catch (error) {
+        res.json(error);
+        console.log(`Error`);
+    }
 
 
 
