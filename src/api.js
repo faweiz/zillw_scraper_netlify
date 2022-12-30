@@ -1,12 +1,6 @@
 const express = require('express');
 const serverless = require('serverless-http');
 
-const puppeteer = require('puppeteer-core');
-const chromium = require("@sparticuz/chromium");
-const dotenv = require("dotenv").config();
-// import dotenv from "dotenv"
-// dotenv.config();
-
 // Create an instance of the Express app
 const app = express();
 // Create a router to handle routes
@@ -25,48 +19,6 @@ router.get('/json', (req, res) => {
         'path':'json',
         'name': "Tony Lee"
     });
-});
-
-router.get('/puppeteer', (req, res) => {
-
-    res.json({
-        'path':'puppeteer',
-        'Message': "Done"
-    });
-    
-    // try {
-    //     (async() =>{
-    //         const browser = await puppeteer.launch({
-    //             args: chromium.args,
-    //             executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
-    //             headless: false,
-    //         });
-            
-    //         const page = await browser.newPage();
-            
-    //         await page.goto('https://zillow.com/');
-            
-    //         const title = await page.title();
-    //         const description = await page.$eval('meta[name="description"]', element => element.content);
-            
-    //         await browser.close();
-
-    //         console.log(`Done`);
-
-    //         res.json({
-    //             'path':'puppeteer',
-    //             'Message': "Done"
-    //         });
-
-    //     })();
-    // } catch (error) {
-    //     res.json(error);
-    //     console.log(`Error`);
-    // }
-
-
-
-
 });
 
 // Use the router to handle requests to the `/.netlify/functions/api` path
