@@ -3,19 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "./src/api.js",
-  "scripts": {
-
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@sparticuz/chromium": "^107.0.0",
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
+    "https": "^1.0.0",
     "netlify-cli": "^12.5.0",
     "netlify-lambda": "^1.6.3",
     "nodemon": "^2.0.20",
     "puppeteer-core": "^18.1.0",
+    "puppeteer-extra": "^3.3.4",
+    "puppeteer-extra-plugin-stealth": "^2.11.1",
+    "request": "^2.88.2",
     "serverless-http": "^2.7.0"
   }
 }
