@@ -136,9 +136,10 @@ router.get('/json', (req, res) => {
             puppeteerExtra.use(pluginStealth());
             const browser = await puppeteerExtra.launch({
                 // args: chromium.args,
-                args: ['--no-sandbox'],
+                args: ['--no-sandbox', '--window-size=1200,800', ],
                 executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
                 headless: false,
+                defaultViewport: { width: 1200, height: 800 },
             });
             
             const page = await browser.newPage();
@@ -146,6 +147,10 @@ router.get('/json', (req, res) => {
                 width: 1200,
                 height: 800
             });
+            await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36");
+            // Configure the navigation timeout
+             await page.setDefaultNavigationTimeout(0);
+
             var url = `${baseUrl}/${address_parm}`;
             console.log(url);
             //await page.goto(url, { waitUntil: 'domcontentloaded' });
