@@ -4,8 +4,7 @@
   "description": "",
   "main": "./src/api.js",
   "scripts": {
-    "start": "nodemon server-local.js",
-    "build": "netlify-lambda build src"
+
   },
   "author": "",
   "license": "ISC",
@@ -18,8 +17,5 @@
     "nodemon": "^2.0.20",
     "puppeteer-core": "^18.1.0",
     "serverless-http": "^2.7.0"
-  },
-  "engines": {
-    "node": "14.1.0"
   }
 }

@@ -56,10 +56,8 @@ const dotenv = require("dotenv").config();
 
 exports.handler = async function(event, context) {
   const browser = await puppeteer.launch({
-    // args: chromium.args,
     args: chromium.args,
     executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
-    //executablePath: puppeteer.executablePath() || await chromium.executablePath,
     headless: true,
   });
 
