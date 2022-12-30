@@ -28,6 +28,11 @@ router.get('/json', (req, res) => {
 });
 
 router.get('/puppeteer', (req, res) => {
+
+    res.json({
+        'path':'puppeteer',
+        'Message': "Done"
+    });
     
     try {
         (async() =>{
