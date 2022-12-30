@@ -135,7 +135,8 @@ router.get('/json', (req, res) => {
             // Puppeteer
             puppeteerExtra.use(pluginStealth());
             const browser = await puppeteerExtra.launch({
-                args: chromium.args,
+                // args: chromium.args,
+                args: ['--no-sandbox'],
                 executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
                 headless: true,
             });
@@ -143,11 +144,14 @@ router.get('/json', (req, res) => {
             const page = await browser.newPage();
             var url = `${baseUrl}/${address_parm}`;
             console.log(url);
-            await page.goto(url, { waitUntil: 'domcontentloaded' });
+            //await page.goto(url, { waitUntil: 'domcontentloaded' });
+            await page.goto(url);
             console.log("here 1?");
 
-            const json  = await page.evaluate(async (params, wants) => {
+            const json = await page.evaluate(async (params, wants) => {
+                console.log("here 1-1?");
                 return await new Promise(async (resolve, reject) => {
+                    console.log("here 1-2?");
                     const response = await fetch(`https://www.zillow.com/search/GetSearchPageState.htm?searchQueryState=${encodeURIComponent(JSON.stringify(params))}&wants=${encodeURIComponent(JSON.stringify(wants))}&requestId=6`, {
                             "headers": {
                             "accept": "*/*",
