@@ -1,0 +1,25 @@
+{
+  "name": "netlify_express_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/api.js",
+  "scripts": {
+    "start": "nodemon server-local.js",
+    "build": "netlify-lambda build src"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sparticuz/chromium": "^109.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.17.1",
+    "netlify-cli": "^12.5.0",
+    "netlify-lambda": "^1.6.3",
+    "nodemon": "^2.0.20",
+    "puppeteer-core": "^19.4.1",
+    "serverless-http": "^2.7.0"
+  },
+  "engines": {
+    "node": "14.1.0"
+  }
+}
