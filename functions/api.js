@@ -127,7 +127,7 @@ router.get('/json', (req, res) => {
                 "isListVisible":true,
                 "mapZoom":15
             };
-            console.log('params', params);
+            //console.log('params', params);
             const wants = {
                 "cat1": ["listResults", "mapResults"], "cat2": ["total"]
             };
@@ -138,10 +138,14 @@ router.get('/json', (req, res) => {
                 // args: chromium.args,
                 args: ['--no-sandbox'],
                 executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
-                headless: true,
+                headless: false,
             });
             
             const page = await browser.newPage();
+            await page.setViewport({
+                width: 1200,
+                height: 800
+            });
             var url = `${baseUrl}/${address_parm}`;
             console.log(url);
             //await page.goto(url, { waitUntil: 'domcontentloaded' });
@@ -149,10 +153,9 @@ router.get('/json', (req, res) => {
             console.log("here 1?");
 
             const json = await page.evaluate(async (params, wants) => {
-                console.log("here 1-1?");
                 return await new Promise(async (resolve, reject) => {
-                    console.log("here 1-2?");
-                    const response = await fetch(`https://www.zillow.com/search/GetSearchPageState.htm?searchQueryState=${encodeURIComponent(JSON.stringify(params))}&wants=${encodeURIComponent(JSON.stringify(wants))}&requestId=6`, {
+                    const response = await fetch(`https://www.zillow.com/search/GetSearchPageState.htm?searchQueryState=${encodeURIComponent(JSON.stringify(params))}&wants=${encodeURIComponent(JSON.stringify(wants))}&requestId=6`
+                    ,{
                             "headers": {
                             "accept": "*/*",
                             "accept-language": "en-US,en;q=0.9,pt-BR;q=0.8,pt;q=0.7",
@@ -170,7 +173,8 @@ router.get('/json', (req, res) => {
                         "method": "GET",
                         "mode": "cors",
                         "credentials": "include"
-                    });
+                    }                    
+                    );
                     const json = await response.json();
                     console.log('json', json);
 
